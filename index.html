@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xigua-tree · 嵌入式软硬件 DIY 爱好者</title>
+<meta name="description" content="xigua-tree 的个人作品集：嵌入式软硬件 DIY 作品与软件项目。">
+<style>
+  :root {
+    --bg: #f6efe0;
+    --bg-deep: #efe4cf;
+    --card: #fffdf6;
+    --ink: #3b3427;
+    --ink-soft: #6e6555;
+    --accent: #bf5036;
+    --accent-deep: #9c3d28;
+    --line: #e0d5bd;
+    --tag-bg: #f1e7d3;
+    --tag-ink: #7a6a4f;
+    --display: "Kaiti SC", "KaiTi", "STKaiti", "楷体", "FangSong", serif;
+    --body: "Songti SC", "STSong", "SimSun", "宋体", serif;
+    --mono: "Consolas", "Menlo", "Courier New", monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    color: var(--ink);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(1200px 600px at 15% -5%, #fbf5e8 0%, transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, #f2e7d0 0%, transparent 55%);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* 纸张颗粒纹理 */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: .05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* 顶部导航 */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(246, 239, 224, .85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--accent-deep);
+    letter-spacing: .5px;
+  }
+  .nav-links { display: flex; gap: 20px; }
+  .nav-links a {
+    font-size: .9rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* 首屏 */
+  header.hero {
+    padding: 72px 0 60px;
+    text-align: center;
+    position: relative;
+  }
+  .avatar-wrap {
+    position: relative;
+    width: 108px;
+    height: 108px;
+    margin: 0 auto 26px;
+  }
+  /* 印章方块（背后微微旋转） */
+  .avatar-wrap::after {
+    content: "西";
+    position: absolute;
+    right: -8px;
+    bottom: -6px;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--card);
+    background: var(--accent);
+    border-radius: 5px;
+    transform: rotate(-6deg);
+    box-shadow: 0 2px 6px rgba(156, 61, 40, .35);
+  }
+  .avatar {
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--card);
+    outline: 1px solid var(--line);
+    box-shadow: 0 6px 20px rgba(90, 70, 40, .18);
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--ink);
+  }
+  .hero .tagline {
+    margin-top: 10px;
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--accent-deep);
+    letter-spacing: 3px;
+  }
+  .hero .sub {
+    margin-top: 18px;
+    font-size: .92rem;
+    color: var(--ink-soft);
+  }
+  .hero .github-pill {
+    display: inline-block;
+    margin-top: 22px;
+    font-family: var(--mono);
+    font-size: .82rem;
+    color: var(--ink-soft);
+    background: var(--card);
+    border: 1px dashed var(--line);
+    border-radius: 20px;
+    padding: 6px 16px;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .hero .github-pill:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* 板块 */
+  section { padding: 46px 0 8px; }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+  .section-mark {
+    width: 11px;
+    height: 11px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--ink);
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--line), transparent);
+  }
+
+  /* 关于 */
+  .about p {
+    font-size: 1.05rem;
+    color: var(--ink);
+    max-width: 640px;
+  }
+
+  /* 作品 */
+  .projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .project {
+    background: var(--card);
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 0 rgba(90, 70, 40, .06);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .project:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 26px rgba(90, 70, 40, .14);
+  }
+  .project-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .project h3 {
+    font-family: var(--display);
+    font-size: 1.28rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--ink);
+  }
+  .project .lang {
+    font-family: var(--mono);
+    font-size: .72rem;
+    color: var(--accent-deep);
+    background: var(--tag-bg);
+    border-radius: 4px;
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
+  .project .desc {
+    font-size: .95rem;
+    color: var(--ink-soft);
+    flex: 1;
+  }
+  .project .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .project .tags span {
+    font-size: .78rem;
+    color: var(--tag-ink);
+    background: var(--tag-bg);
+    border-radius: 12px;
+    padding: 3px 10px;
+  }
+  .project .link {
+    margin-top: 16px;
+    font-family: var(--mono);
+    font-size: .8rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    align-self: flex-start;
+    transition: color .2s;
+  }
+  .project .link:hover { color: var(--accent); }
+
+  /* 技能 */
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .skill {
+    font-size: .95rem;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 8px 18px;
+    box-shadow: 0 1px 0 rgba(90, 70, 40, .05);
+    transition: all .2s;
+  }
+  .skill:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* 联系 */
+  .contact-list { list-style: none; }
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .contact-list li:last-child { border-bottom: none; }
+  .contact-ico {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    font-size: 1.15rem;
+    background: var(--tag-bg);
+    border-radius: 9px;
+  }
+  .contact-list a, .contact-list .text {
+    font-size: 1rem;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color .2s;
+    word-break: break-all;
+  }
+  .contact-list a:hover { color: var(--accent-deep); }
+
+  footer {
+    margin-top: 60px;
+    padding: 28px 0 40px;
+    text-align: center;
+    font-family: var(--display);
+    font-size: .88rem;
+    color: var(--ink-soft);
+    letter-spacing: 2px;
+  }
+
+  /* 入场动画 */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .rise { animation: rise .7s ease both; }
+  .d1 { animation-delay: .05s; }
+  .d2 { animation-delay: .15s; }
+  .d3 { animation-delay: .25s; }
+  .d4 { animation-delay: .35s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 640px) {
+    .projects { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    .nav-links { gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="brand">xigua-tree</span>
+    <div class="nav-links">
+      <a href="#about">关于</a>
+      <a href="#projects">作品</a>
+      <a href="#skills">技能</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="avatar-wrap rise d1">
+      <img class="avatar" src="avatar.png" alt="头像">
+    </div>
+    <h1 class="rise d1">xigua-tree</h1>
+    <p class="tagline rise d2">嵌入式软硬件 DIY 爱好者</p>
+    <p class="sub rise d3">从结构设计到 Linux 驱动，把想法亲手做成实物</p>
+    <a class="github-pill rise d4" href="https://github.com/xigua-tree" target="_blank" rel="noopener">github.com/xigua-tree</a>
+  </header>
+
+  <section id="about">
+    <div class="section-head">
+      <span class="section-mark"></span>
+      <h2 class="section-title">关于我</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="about">
+      <p>我喜欢 DIY 各种电子项目。主攻嵌入式开发，熟悉硬件焊接，用 SolidWorks 做结构设计、能画四层板。</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <span class="section-mark"></span>
+      <h2 class="section-title">作品</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="projects">
+
+      <div class="project">
+        <div class="project-head">
+          <h3>中国象棋机器人</h3>
+          <span class="lang">Python</span>
+        </div>
+        <p class="desc">做了一个会自动下棋的中国象棋机器人，涵盖机械结构、电路与视觉识别，用 Python 完成控制与对弈逻辑。</p>
+        <div class="tags">
+          <span>Python</span><span>机械设计</span><span>电路</span><span>视觉识别</span>
+        </div>
+        <a class="link" href="https://github.com/xigua-tree/chinese_chess_robot" target="_blank" rel="noopener">查看源码 →</a>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>IMX6ULL 双网口快速切换</h3>
+          <span class="lang">C</span>
+        </div>
+        <p class="desc">针对 IMX6ULL 双网口 Bonding 模式下 MII 链路故障检测慢的问题，从 Linux 内核网络驱动层优化，把主备切换时间稳定控制在 80ms 内。</p>
+        <div class="tags">
+          <span>Linux 内核</span><span>驱动开发</span><span>C</span><span>网络</span>
+        </div>
+        <a class="link" href="https://github.com/xigua-tree/imx6ull-bonding-fast-failover" target="_blank" rel="noopener">查看源码 →</a>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>RK3568 监控摄像头</h3>
+          <span class="lang">C++</span>
+        </div>
+        <p class="desc">基于 RK3568 的监控摄像头，采集画面经过 YOLO 推理后，通过 RTSP 推流输出。</p>
+        <div class="tags">
+          <span>C++</span><span>RK3568</span><span>YOLO</span><span>嵌入式</span>
+        </div>
+        <a class="link" href="https://github.com/xigua-tree/Surveillance-Camera" target="_blank" rel="noopener">查看源码 →</a>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>工程机器人</h3>
+          <span class="lang">C</span>
+        </div>
+        <p class="desc">计划制作的一台工程机器人（robot_bubin），目前已完成底盘设计，仍在开发中。</p>
+        <div class="tags">
+          <span>C</span><span>机械设计</span><span>嵌入式</span>
+        </div>
+        <a class="link" href="https://github.com/xigua-tree/robot_bubin" target="_blank" rel="noopener">查看源码 →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <span class="section-mark"></span>
+      <h2 class="section-title">技能</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="skills">
+      <span class="skill">嵌入式 Linux 驱动</span>
+      <span class="skill">硬件焊接</span>
+      <span class="skill">SolidWorks 结构设计</span>
+      <span class="skill">嘉立创 EDA 画板</span>
+      <span class="skill">C / C++ / Python</span>
+      <span class="skill">单片机开发</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">
+      <span class="section-mark"></span>
+      <h2 class="section-title">联系我</h2>
+      <span class="section-rule"></span>
+    </div>
+    <ul class="contact-list">
+      <li>
+        <span class="contact-ico">✉️</span>
+        <a href="mailto:1036949664@qq.com">1036949664@qq.com</a>
+      </li>
+      <li>
+        <span class="contact-ico">🐙</span>
+        <a href="https://github.com/xigua-tree" target="_blank" rel="noopener">github.com/xigua-tree</a>
+      </li>
+      <li>
+        <span class="contact-ico">📺</span>
+        <span class="text">B站：西瓜树上的鱼</span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>— xigua-tree —</footer>
+
+</div>
+</body>
+</html>
