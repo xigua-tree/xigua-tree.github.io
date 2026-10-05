@@ -349,6 +349,16 @@
     border-radius: 12px;
     padding: 3px 10px;
   }
+  .video-project .link {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: .8rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .video-project .link:hover { color: var(--accent); }
 
   /* 技能 */
   .skills {
@@ -583,17 +593,18 @@
 
       <div class="video-project">
         <div class="video-head">
-          <h3>基于 RK3568 的 AI 监控</h3>
+          <h3>RK3568 监控摄像头</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
           <source src="videos/rk3568-ai-monitor.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">基于 RK3568 的 AI 智能监控设备。</p>
+        <p class="desc">基于 RK3568 的监控摄像头，采集画面经过 YOLO 推理后，通过 RTSP 推流输出。</p>
         <div class="tags">
-          <span>RK3568</span><span>AI</span><span>视觉</span>
+          <span>C++</span><span>RK3568</span><span>YOLO</span><span>嵌入式</span>
         </div>
+        <a class="link" href="https://github.com/xigua-tree/Surveillance-Camera" target="_blank" rel="noopener">查看源码 →</a>
       </div>
 
       <div class="video-project">
@@ -698,18 +709,6 @@
           <span>Linux 内核</span><span>驱动开发</span><span>C</span><span>网络</span>
         </div>
         <a class="link" href="https://github.com/xigua-tree/imx6ull-bonding-fast-failover" target="_blank" rel="noopener">查看源码 →</a>
-      </div>
-
-      <div class="project">
-        <div class="project-head">
-          <h3>RK3568 监控摄像头</h3>
-          <span class="lang">C++</span>
-        </div>
-        <p class="desc">基于 RK3568 的监控摄像头，采集画面经过 YOLO 推理后，通过 RTSP 推流输出。</p>
-        <div class="tags">
-          <span>C++</span><span>RK3568</span><span>YOLO</span><span>嵌入式</span>
-        </div>
-        <a class="link" href="https://github.com/xigua-tree/Surveillance-Camera" target="_blank" rel="noopener">查看源码 →</a>
       </div>
 
       <div class="project">
