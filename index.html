@@ -271,6 +271,83 @@
   }
   .project .link:hover { color: var(--accent); }
 
+  /* 分组小标题 */
+  .subheading {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--accent-deep);
+    letter-spacing: 2px;
+    margin: 8px 0 16px;
+  }
+
+  /* 视频项目 */
+  .video-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 34px;
+  }
+  .video-project {
+    background: var(--card);
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 1px 0 rgba(90, 70, 40, .06);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .video-project:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 26px rgba(90, 70, 40, .14);
+  }
+  .video-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .video-project h3 {
+    font-family: var(--display);
+    font-size: 1.28rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--ink);
+  }
+  .video-project .lang {
+    font-family: var(--mono);
+    font-size: .72rem;
+    color: var(--accent-deep);
+    background: var(--tag-bg);
+    border-radius: 4px;
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
+  .video-project .demo-video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    background: #1f1a12;
+  }
+  .video-project .desc {
+    margin-top: 14px;
+    font-size: .95rem;
+    color: var(--ink-soft);
+  }
+  .video-project .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .video-project .tags span {
+    font-size: .78rem;
+    color: var(--tag-ink);
+    background: var(--tag-bg);
+    border-radius: 12px;
+    padding: 3px 10px;
+  }
+
   /* 技能 */
   .skills {
     display: flex;
@@ -394,6 +471,102 @@
       <h2 class="section-title">作品</h2>
       <span class="section-rule"></span>
     </div>
+    <div class="subheading">项目演示</div>
+    <div class="video-projects">
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>送药小车</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/delivery-car.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">能自动运送药品的小车，用于医疗配送场景。</p>
+        <div class="tags">
+          <span>嵌入式</span><span>机械设计</span><span>自动控制</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>自动驾驶小车</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/auto-driving-car.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">具备自动循迹与避障能力的小车。</p>
+        <div class="tags">
+          <span>嵌入式</span><span>传感器</span><span>自动控制</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>运动目标追踪系统</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/target-tracking.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">通过摄像头识别并自动追踪运动目标的系统。</p>
+        <div class="tags">
+          <span>视觉</span><span>追踪</span><span>嵌入式</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>太阳能追光云台</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/solar-tracking-gimbal.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">自动追踪太阳位置，让太阳能板始终正对光源的云台。</p>
+        <div class="tags">
+          <span>机械设计</span><span>传感器</span><span>云台</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>图传小狗</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/robot-dog-fpv.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">带实时图传功能的机器人小狗。</p>
+        <div class="tags">
+          <span>机器人</span><span>图传</span><span>嵌入式</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>桌面终端</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/desktop-terminal.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">桌面终端设备。</p>
+        <div class="tags">
+          <span>嵌入式</span><span>硬件</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="subheading">开源项目</div>
     <div class="projects">
 
       <div class="project">
