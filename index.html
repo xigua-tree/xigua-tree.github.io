@@ -831,5 +831,18 @@
   <footer>— xigua-tree —</footer>
 
 </div>
+
+<script>
+  // 同一时间只播放一个视频：播放某个视频时，自动暂停其它所有视频
+  document.querySelectorAll('video').forEach(function (video) {
+    video.addEventListener('play', function () {
+      document.querySelectorAll('video').forEach(function (other) {
+        if (other !== video) {
+          other.pause();
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
