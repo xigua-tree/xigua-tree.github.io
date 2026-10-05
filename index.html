@@ -336,6 +336,29 @@
     font-size: .95rem;
     color: var(--ink-soft);
   }
+  .video-project .points {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+  }
+  .video-project .points li {
+    position: relative;
+    padding-left: 16px;
+    margin-top: 6px;
+    font-size: .92rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+  .video-project .points li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: .62em;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
   .video-project .tags {
     display: flex;
     flex-wrap: wrap;
@@ -488,136 +511,24 @@
 
       <div class="video-project">
         <div class="video-head">
-          <h3>送药小车</h3>
+          <h3>中国象棋机器人</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/delivery-car.mp4" type="video/mp4">
+          <source src="videos/chinese-chess-robot.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">能自动运送药品的小车，用于医疗配送场景。</p>
+        <p class="desc">自己动手做的一台中国象棋机器人，摄像头识别局面、引擎决策、机械臂落子，全程自动对弈。</p>
+        <ul class="points">
+          <li>硬件平台：DK-2500 + Intel Core Ultra 5 225U，全程 Python 开发</li>
+          <li>机械结构：三自由度机械臂，闭环步进电机（串口下发角度即可控制），末端电磁铁吸子</li>
+          <li>视觉识别：OpenCV 提取棋子坐标，自训练 YOLOv8n 模型分类棋子类别</li>
+          <li>对弈引擎：棋盘局面转 FEN 串，接入 Pikafish 引擎返回 UCI 走法</li>
+          <li>控制链路：二维视觉坐标 → 三维映射 → 运动学逆解 → 电机角度 → 机械臂落子</li>
+          <li>交互与稳定：Qt 上位机；帧间校验 + 走法判断降低误判</li>
+        </ul>
         <div class="tags">
-          <span>嵌入式</span><span>机械设计</span><span>自动控制</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>自动驾驶小车</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/auto-driving-car.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">具备自动循迹与避障能力的小车。</p>
-        <div class="tags">
-          <span>嵌入式</span><span>传感器</span><span>自动控制</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>运动目标追踪系统</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/target-tracking.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">通过摄像头识别并自动追踪运动目标的系统。</p>
-        <div class="tags">
-          <span>视觉</span><span>追踪</span><span>嵌入式</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>太阳能追光云台</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/solar-tracking-gimbal.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">自动追踪太阳位置，让太阳能板始终正对光源的云台。</p>
-        <div class="tags">
-          <span>机械设计</span><span>传感器</span><span>云台</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>图传小狗</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/robot-dog-fpv.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">带实时图传功能的机器人小狗。</p>
-        <div class="tags">
-          <span>机器人</span><span>图传</span><span>嵌入式</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>桌面终端</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/desktop-terminal.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">桌面终端设备。</p>
-        <div class="tags">
-          <span>嵌入式</span><span>硬件</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>双车跟随系统</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/car-following-system.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">两辆小车协同跟随行驶的系统。</p>
-        <div class="tags">
-          <span>嵌入式</span><span>自动控制</span><span>传感器</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>RK3568 监控摄像头</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/rk3568-ai-monitor.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">基于 RK3568 的监控摄像头，采集画面经过 YOLO 推理后，通过 RTSP 推流输出。</p>
-        <div class="tags">
-          <span>C++</span><span>RK3568</span><span>YOLO</span><span>嵌入式</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>一氧化碳检测刹停装置</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/co-detector-brake.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">基于磁电机能量捕获的一氧化碳检测与刹停装置。</p>
-        <div class="tags">
-          <span>传感器</span><span>能量捕获</span><span>嵌入式</span>
+          <span>Python</span><span>机械设计</span><span>电路</span><span>视觉识别</span>
         </div>
       </div>
 
@@ -653,76 +564,61 @@
 
       <div class="video-project">
         <div class="video-head">
-          <h3>舵机机械臂</h3>
+          <h3>送药小车</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/servo-robot-arm.mp4" type="video/mp4">
+          <source src="videos/delivery-car.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">舵机驱动的机械臂。</p>
+        <p class="desc">能自动运送药品的小车，用于医疗配送场景。</p>
         <div class="tags">
-          <span>机械设计</span><span>舵机</span><span>控制</span>
+          <span>嵌入式</span><span>机械设计</span><span>自动控制</span>
         </div>
       </div>
 
       <div class="video-project">
         <div class="video-head">
-          <h3>蛇形机器人</h3>
+          <h3>运动目标追踪系统</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/snake-robot.mp4" type="video/mp4">
+          <source src="videos/target-tracking.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">蛇形机器人。</p>
+        <p class="desc">通过摄像头识别并自动追踪运动目标的系统。</p>
         <div class="tags">
-          <span>机器人</span><span>机械设计</span><span>嵌入式</span>
+          <span>视觉</span><span>追踪</span><span>嵌入式</span>
         </div>
       </div>
 
       <div class="video-project">
         <div class="video-head">
-          <h3>中国象棋机器人</h3>
+          <h3>自动驾驶小车</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/chinese-chess-robot.mp4" type="video/mp4">
+          <source src="videos/auto-driving-car.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">做了一个会自动下棋的中国象棋机器人，涵盖机械结构、电路与视觉识别，用 Python 完成控制与对弈逻辑。</p>
+        <p class="desc">具备自动循迹与避障能力的小车。</p>
         <div class="tags">
-          <span>Python</span><span>机械设计</span><span>电路</span><span>视觉识别</span>
+          <span>嵌入式</span><span>传感器</span><span>自动控制</span>
         </div>
       </div>
 
       <div class="video-project">
         <div class="video-head">
-          <h3>工业机器人物料抓取仿真</h3>
+          <h3>双车跟随系统</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/industrial-robot-grab.mp4" type="video/mp4">
+          <source src="videos/car-following-system.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">工业机器人物料抓取仿真。</p>
+        <p class="desc">两辆小车协同跟随行驶的系统。</p>
         <div class="tags">
-          <span>仿真</span><span>机械</span><span>工业</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>机械臂开红牛</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/robot-arm-redbull.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">机械臂抓取并开启红牛罐的演示。</p>
-        <div class="tags">
-          <span>机械臂</span><span>控制</span><span>视觉</span>
+          <span>嵌入式</span><span>自动控制</span><span>传感器</span>
         </div>
       </div>
 
@@ -758,6 +654,66 @@
 
       <div class="video-project">
         <div class="video-head">
+          <h3>桌面终端</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/desktop-terminal.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">桌面终端设备。</p>
+        <div class="tags">
+          <span>嵌入式</span><span>硬件</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>蛇形机器人</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/snake-robot.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">蛇形机器人。</p>
+        <div class="tags">
+          <span>机器人</span><span>机械设计</span><span>嵌入式</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>太阳能追光云台</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/solar-tracking-gimbal.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">自动追踪太阳位置，让太阳能板始终正对光源的云台。</p>
+        <div class="tags">
+          <span>机械设计</span><span>传感器</span><span>云台</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>图传小狗</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/robot-dog-fpv.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">带实时图传功能的机器人小狗。</p>
+        <div class="tags">
+          <span>机器人</span><span>图传</span><span>嵌入式</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
           <h3>物联网小灯</h3>
           <span class="lang">▶ 演示</span>
         </div>
@@ -783,6 +739,81 @@
         <p class="desc">能自动调平的水平仪。</p>
         <div class="tags">
           <span>传感器</span><span>控制</span><span>机械设计</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>RK3568 监控摄像头</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/rk3568-ai-monitor.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">基于 RK3568 的监控摄像头，采集画面经过 YOLO 推理后，通过 RTSP 推流输出。</p>
+        <div class="tags">
+          <span>C++</span><span>RK3568</span><span>YOLO</span><span>嵌入式</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>一氧化碳检测刹停装置</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/co-detector-brake.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">基于磁电机能量捕获的一氧化碳检测与刹停装置。</p>
+        <div class="tags">
+          <span>传感器</span><span>能量捕获</span><span>嵌入式</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>舵机机械臂</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/servo-robot-arm.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">舵机驱动的机械臂。</p>
+        <div class="tags">
+          <span>机械设计</span><span>舵机</span><span>控制</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>工业机器人物料抓取仿真</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/industrial-robot-grab.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">工业机器人物料抓取仿真。</p>
+        <div class="tags">
+          <span>仿真</span><span>机械</span><span>工业</span>
+        </div>
+      </div>
+
+      <div class="video-project">
+        <div class="video-head">
+          <h3>机械臂开红牛</h3>
+          <span class="lang">▶ 演示</span>
+        </div>
+        <video class="demo-video" controls preload="metadata" playsinline>
+          <source src="videos/robot-arm-redbull.mp4" type="video/mp4">
+          你的浏览器不支持视频播放。
+        </video>
+        <p class="desc">机械臂抓取并开启红牛罐的演示。</p>
+        <div class="tags">
+          <span>机械臂</span><span>控制</span><span>视觉</span>
         </div>
       </div>
 
