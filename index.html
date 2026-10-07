@@ -469,9 +469,7 @@
   <div class="nav-inner">
     <span class="brand">xigua-tree</span>
     <div class="nav-links">
-      <a href="#about">关于</a>
       <a href="#projects">作品</a>
-      <a href="#skills">技能</a>
       <a href="#contact">联系</a>
     </div>
   </div>
@@ -484,21 +482,8 @@
       <img class="avatar" src="avatar.png" alt="头像">
     </div>
     <h1 class="rise d1">xigua-tree</h1>
-    <p class="tagline rise d2">嵌入式软硬件 DIY 爱好者</p>
-    <p class="sub rise d3">从结构设计到 Linux 驱动，把想法亲手做成实物</p>
     <a class="github-pill rise d4" href="https://github.com/xigua-tree" target="_blank" rel="noopener">github.com/xigua-tree</a>
   </header>
-
-  <section id="about">
-    <div class="section-head">
-      <span class="section-mark"></span>
-      <h2 class="section-title">关于我</h2>
-      <span class="section-rule"></span>
-    </div>
-    <div class="about">
-      <p>我喜欢 DIY 各种电子项目。主攻嵌入式开发，熟悉硬件焊接，用 SolidWorks 做结构设计、能画四层板。</p>
-    </div>
-  </section>
 
   <section id="projects">
     <div class="section-head">
@@ -518,17 +503,17 @@
           <source src="videos/chinese-chess-robot.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">自己动手做的一台中国象棋机器人，摄像头识别局面、引擎决策、机械臂落子，全程自动对弈。</p>
+        <p class="desc">一台中国象棋机器人，摄像头识别局面、引擎决策、机械臂落子，全程自动对弈。</p>
         <ul class="points">
           <li>硬件平台：DK-2500 + Intel Core Ultra 5 225U，全程 Python 开发</li>
-          <li>机械结构：三自由度机械臂，闭环步进电机（串口下发角度即可控制），末端电磁铁吸子</li>
+          <li>机械结构：三自由度机械臂，闭环步进电机驱动，末端电磁铁吸子</li>
           <li>视觉识别：OpenCV 提取棋子坐标，自训练 YOLOv8n 模型分类棋子类别</li>
           <li>对弈引擎：棋盘局面转 FEN 串，接入 Pikafish 引擎返回 UCI 走法</li>
           <li>控制链路：二维视觉坐标 → 三维映射 → 运动学逆解 → 电机角度 → 机械臂落子</li>
           <li>交互与稳定：Qt 上位机；帧间校验 + 走法判断降低误判</li>
         </ul>
         <div class="tags">
-          <span>Python</span><span>机械设计</span><span>电路</span><span>视觉识别</span>
+          <span>Python</span><span>OpenCV</span><span>机器人运动学</span><span>Qt</span><span>电路设计</span><span>机械设计</span>
         </div>
       </div>
 
@@ -541,9 +526,14 @@
           <source src="videos/tracked-quadruped-robot.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">履带式四足机器人。</p>
+        <p class="desc">一台履带底盘 + 四足步态的移动机器人，双 MCU 分工，网页遥控。</p>
+        <ul class="points">
+          <li>整体结构：全身 8 个自由度，大扭矩模拟舵机驱动，履带轮配直流减速电机</li>
+          <li>下位机：STM32F103C8T6，负责姿态解算与信号输出</li>
+          <li>上位机：ESP32-CAM 开 AP 热点推网页视频流，网页端控制方向、切换模式</li>
+        </ul>
         <div class="tags">
-          <span>机器人</span><span>机械设计</span><span>嵌入式</span>
+          <span>C/C++</span><span>STM32/ESP32</span><span>步态控制</span><span>电路设计</span><span>机械设计</span>
         </div>
       </div>
 
@@ -556,9 +546,16 @@
           <source src="videos/auto-aiming-device.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">简易自动瞄准装置。</p>
+        <p class="desc">2025 年 TI 杯全国大学生电子设计竞赛控制类赛题：摄像头识别标靶、激光自动瞄准打靶的小车。</p>
+        <ul class="points">
+          <li>整车结构：底盘两个直流减速电机配万向轮；两个闭环步进电机构成二维云台，搭载摄像头与激光打靶，串口屏交互</li>
+          <li>主控：MSPM0G3507，统一处理陀螺仪 yaw 轴解算、巡线、串口屏模式选择、视觉串口通信与云台控制</li>
+          <li>底盘控制：PID 完成速度环、位置环、角度环</li>
+          <li>云台控制：PID 实现激光点与标靶中心像素点的 PD 闭环</li>
+          <li>视觉识别：K230 搭配 YOLO 完成标靶识别</li>
+        </ul>
         <div class="tags">
-          <span>机械设计</span><span>传感器</span><span>控制</span>
+          <span>C</span><span>MSPM0</span><span>PID</span><span>机器视觉</span><span>电路设计</span><span>机械设计</span>
         </div>
       </div>
 
@@ -571,9 +568,14 @@
           <source src="videos/delivery-car.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">能自动运送药品的小车，用于医疗配送场景。</p>
+        <p class="desc">2021 年 TI 杯全国大学生电子设计竞赛控制类赛题：识别数字路口、自动循迹行驶的送药小车。</p>
+        <ul class="points">
+          <li>主控：STM32F407VET6，处理陀螺仪 yaw 轴解算、巡线与视觉模块串口通信</li>
+          <li>底盘控制：PID 完成速度环、位置环、角度环</li>
+          <li>视觉识别：MaixCam 搭配 YOLO 识别数字，输出转向方向</li>
+        </ul>
         <div class="tags">
-          <span>嵌入式</span><span>机械设计</span><span>自动控制</span>
+          <span>C</span><span>STM32</span><span>PID</span><span>机器视觉</span><span>电路设计</span>
         </div>
       </div>
 
@@ -586,9 +588,13 @@
           <source src="videos/target-tracking.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">通过摄像头识别并自动追踪运动目标的系统。</p>
+        <p class="desc">2023 年 TI 杯全国大学生电子设计竞赛控制类赛题：激光实时追踪矩形目标角点的系统。</p>
+        <ul class="points">
+          <li>视觉识别：MaixCam 识别矩形角点</li>
+          <li>云台控制：两个闭环步进电机构成云台，激光点与目标角点像素间 PD 闭环</li>
+        </ul>        
         <div class="tags">
-          <span>视觉</span><span>追踪</span><span>嵌入式</span>
+          <span>MicroPython</span><span>机器视觉</span><span>PID</span><span>机械设计</span>
         </div>
       </div>
 
@@ -601,9 +607,13 @@
           <source src="videos/auto-driving-car.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">具备自动循迹与避障能力的小车。</p>
+        <p class="desc">2024 年 TI 杯全国大学生电子设计竞赛控制类赛题：自主循迹行驶的小车。</p>
+        <ul class="points">
+          <li>主控：MSPM0G3507，处理陀螺仪 yaw 轴解算与巡线</li>
+          <li>底盘控制：PID 完成速度环、位置环、角度环</li>
+        </ul>        
         <div class="tags">
-          <span>嵌入式</span><span>传感器</span><span>自动控制</span>
+          <span>C</span><span>MSPM0</span><span>PID</span><span>电路设计</span>
         </div>
       </div>
 
@@ -616,9 +626,14 @@
           <source src="videos/car-following-system.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">两辆小车协同跟随行驶的系统。</p>
+        <p class="desc">2022 年 TI 杯全国大学生电子设计竞赛控制类赛题：前后车协同跟随行驶的系统。</p>
+        <ul class="points">
+          <li>主控与通信：STM32F103C8T6；HC-14 无线模块双车通信，超声波测距保持车距</li>
+          <li>视觉巡线：K210 识别路线</li>
+          <li>底盘控制：PID 完成速度环巡线</li>
+        </ul>        
         <div class="tags">
-          <span>嵌入式</span><span>自动控制</span><span>传感器</span>
+          <span>C</span><span>STM32</span><span>PID</span><span>机器视觉</span><span>电路设计</span>
         </div>
       </div>
 
@@ -631,54 +646,73 @@
           <source src="videos/ball-balance-control.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">通过自动控制让小球保持平衡的滚球控制系统。</p>
+        <p class="desc">2017 年 TI 杯全国大学生电子设计竞赛控制类赛题：让小球稳定停在板上目标点的控制系统。</p>
+        <ul class="points">
+          <li>视觉识别：K230 搭配 YOLO 识别小球与板上目标点</li>
+          <li>云台控制：两个闭环步进电机，小球视觉坐标与目标点像素间 PD 闭环</li>
+        </ul>           
         <div class="tags">
-          <span>控制</span><span>传感器</span><span>嵌入式</span>
+          <span>MicroPython</span><span>机器视觉</span><span>PID</span><span>机械设计</span>
         </div>
       </div>
 
       <div class="video-project">
         <div class="video-head">
-          <h3>爬坡小车</h3>
+          <h3>坡道行驶电动小车</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
           <source src="videos/climbing-car.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">能爬坡的小车。</p>
+        <p class="desc">2020 年 TI 杯全国大学生电子设计竞赛控制类赛题：能稳定爬坡行驶的电动小车。</p>
+        <ul class="points">
+          <li>主控：STM32F103C8T6</li>
+          <li>结构：两个直流减速电机 + 阿克曼转向机构</li>
+          <li>控制：PID 完成速度环巡线</li>
+        </ul>             
         <div class="tags">
-          <span>机械设计</span><span>嵌入式</span><span>动力</span>
+          <span>C</span><span>STM32</span><span>PID</span><span>电路设计</span><span>机械设计</span>
         </div>
       </div>
 
       <div class="video-project">
         <div class="video-head">
-          <h3>桌面终端</h3>
+          <h3>智能桌面终端</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
           <source src="videos/desktop-terminal.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">桌面终端设备。</p>
+        <p class="desc">整合 FOC 触感反弹旋钮与 Exlink 两个开源项目，做一台带触感旋钮的桌面终端。</p>
+        <ul class="points">
+          <li>触感旋钮：单个云台电机，位置环 + 速度环实现多挡位触感切换</li>
+          <li>界面：LVGL 开发图形界面</li>
+          <li>连接：BLE 蓝牙连 Windows，通过 Keyboard 库实现 Surface Dial 功能</li>
+        </ul>        
         <div class="tags">
-          <span>嵌入式</span><span>硬件</span>
+          <span>C/C++</span><span>ESP32</span><span>FOC</span><span>BLE</span><span>电路设计</span>
         </div>
       </div>
 
       <div class="video-project">
         <div class="video-head">
-          <h3>蛇形机器人</h3>
+          <h3>尺蠖机器人</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
           <source src="videos/snake-robot.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">蛇形机器人。</p>
+        <p class="desc">仿尺蠖虫形步态的爬行机器人，网页遥控并带环境检测。</p>
+        <ul class="points">
+          <li>结构：ESP32-CAM + 六个大扭矩舵机，仿虫形步态</li>
+          <li>环境检测：温湿度 + 一氧化碳传感器测量气体</li>
+          <li>遥控：网页实时传视频流，控制前进、后退、左转、右转</li>
+        </ul>      
         <div class="tags">
-          <span>机器人</span><span>机械设计</span><span>嵌入式</span>
+          <span>C/C++</span><span>ESP32</span><span>步态控制</span><span>电路设计</span>
         </div>
       </div>
 
@@ -691,9 +725,13 @@
           <source src="videos/solar-tracking-gimbal.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">自动追踪太阳位置，让太阳能板始终正对光源的云台。</p>
+        <p class="desc">自动追踪光源、让太阳能板始终正对光源的云台。</p>
+        <ul class="points">
+          <li>传感：ADC 读取四个光敏电阻，计算光强分布</li>
+          <li>控制：二维舵机云台对准光源，N20 电机控制扇叶展开与收起</li>
+        </ul>   
         <div class="tags">
-          <span>机械设计</span><span>传感器</span><span>云台</span>
+          <span>C/C++</span><span>Arduino</span><span>云台</span>
         </div>
       </div>
 
@@ -706,9 +744,13 @@
           <source src="videos/robot-dog-fpv.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">带实时图传功能的机器人小狗。</p>
+        <p class="desc">带实时图传的机器人小狗，网页遥控各种步态与姿态。</p>
+        <ul class="points">
+          <li>结构：ESP32-CAM + 4 个 SG90 舵机</li>
+          <li>遥控：网页实时传视频流，控制前进、后退、左转、右转及交互姿态</li>
+        </ul> 
         <div class="tags">
-          <span>机器人</span><span>图传</span><span>嵌入式</span>
+          <span>C/C++</span><span>ESP32</span><span>步态控制</span>
         </div>
       </div>
 
@@ -721,9 +763,14 @@
           <source src="videos/iot-light.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">物联网控制的智能小灯。</p>
+        <p class="desc">可通过网络或蓝牙远程控制的氛围彩灯。</p>
+        <ul class="points">
+          <li>硬件：ESP32-S3 + WS2812 灯珠</li>
+          <li>通信：巴法云 MQTT 云服务器 + BLE 蓝牙</li>
+          <li>控制：自研 .apk 客户端远程控制彩灯状态</li>
+        </ul>         
         <div class="tags">
-          <span>物联网</span><span>嵌入式</span><span>硬件</span>
+          <span>C/C++</span><span>ESP32</span><span>MQTT</span>
         </div>
       </div>
 
@@ -736,24 +783,32 @@
           <source src="videos/auto-leveling.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">能自动调平的水平仪。</p>
+        <p class="desc">读取姿态、自动调平的水平仪。</p>
+        <ul class="points">
+          <li>传感：ESP32 读取陀螺仪姿态数据</li>
+          <li>执行：两个步进电机调平平台</li>
+        </ul>         
         <div class="tags">
-          <span>传感器</span><span>控制</span><span>机械设计</span>
+          <span>C/C++</span><span>ESP32</span><span>机械设计</span>
         </div>
       </div>
 
       <div class="video-project">
         <div class="video-head">
-          <h3>RK3568 监控摄像头</h3>
+          <h3>RK3568监控摄像头</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
           <source src="videos/rk3568-ai-monitor.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">基于 RK3568 的监控摄像头，采集画面经过 YOLO 推理后，通过 RTSP 推流输出。</p>
+        <p class="desc">基于 RK3568 的 AI 监控摄像头，NPU 部署人形检测。</p>
+        <ul class="points">
+          <li>视频链路：IMX415 MIPI 摄像头，1080p 采集、H.264 硬编码、RTSP 推流、SD 卡录像</li>
+          <li>AI 检测：NPU 部署 YOLOv8 人形检测模型</li>
+        </ul>          
         <div class="tags">
-          <span>C++</span><span>RK3568</span><span>YOLO</span><span>嵌入式</span>
+          <span>C++</span><span>RK3568</span><span>V4L2</span><span>NPU加速</span>
         </div>
       </div>
 
@@ -766,24 +821,14 @@
           <source src="videos/co-detector-brake.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">基于磁电机能量捕获的一氧化碳检测与刹停装置。</p>
+        <p class="desc">无需外接电源，捕获发动机点火能量供电的一氧化碳检测与刹停装置。</p>
+        <ul class="points">
+          <li>取电：正半周取电电路捕获点火线圈尖峰脉冲，转直流电给外设供电，无需外接电源</li>
+          <li>检测：STM32F070F6P6 读取一氧化碳浓度</li>
+          <li>执行：浓度超标时经负半周熄火电路刹停发动机</li>
+        </ul>   
         <div class="tags">
-          <span>传感器</span><span>能量捕获</span><span>嵌入式</span>
-        </div>
-      </div>
-
-      <div class="video-project">
-        <div class="video-head">
-          <h3>舵机机械臂</h3>
-          <span class="lang">▶ 演示</span>
-        </div>
-        <video class="demo-video" controls preload="metadata" playsinline>
-          <source src="videos/servo-robot-arm.mp4" type="video/mp4">
-          你的浏览器不支持视频播放。
-        </video>
-        <p class="desc">舵机驱动的机械臂。</p>
-        <div class="tags">
-          <span>机械设计</span><span>舵机</span><span>控制</span>
+          <span>C</span><span>STM32</span><span>电路设计</span>
         </div>
       </div>
 
@@ -796,45 +841,39 @@
           <source src="videos/industrial-robot-grab.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">工业机器人物料抓取仿真。</p>
+        <p class="desc">睿康机器人大赛仿真赛道：Gazebo 仿真完成物料抓取、运输、放置全流程。</p>
+        <ul class="points">
+          <li>定位：AR 码二次定位 + SLAM 建图</li>
+          <li>抓取：机械臂眼手协同抓取</li>
+          <li>导航：自主导航完成物料抓取、运输、放置</li>
+        </ul> 
         <div class="tags">
-          <span>仿真</span><span>机械</span><span>工业</span>
+          <span>C/C++</span><span>SLAM</span><span>Gazebo仿真</span>
         </div>
       </div>
 
       <div class="video-project">
         <div class="video-head">
-          <h3>机械臂开红牛</h3>
+          <h3>机械臂开饮品操作</h3>
           <span class="lang">▶ 演示</span>
         </div>
         <video class="demo-video" controls preload="metadata" playsinline>
           <source src="videos/robot-arm-redbull.mp4" type="video/mp4">
           你的浏览器不支持视频播放。
         </video>
-        <p class="desc">机械臂抓取并开启红牛罐的演示。</p>
+        <p class="desc">全国三维创新竞赛机器人赛道：机械臂开瓶饮料的操作演示。</p>
+        <ul class="points">
+          <li>编程：华中数控示教器编程</li>
+          <li>控制：笛卡尔空间坐标系控制机械臂</li>
+          <li>任务：完成开红牛、苏打水、金银花露等饮品</li>
+        </ul> 
         <div class="tags">
-          <span>机械臂</span><span>控制</span><span>视觉</span>
+          <span>机械臂</span><span>坐标控制</span><span>示教器编程</span>
         </div>
       </div>
 
     </div>
 
-  </section>
-
-  <section id="skills">
-    <div class="section-head">
-      <span class="section-mark"></span>
-      <h2 class="section-title">技能</h2>
-      <span class="section-rule"></span>
-    </div>
-    <div class="skills">
-      <span class="skill">嵌入式 Linux 驱动</span>
-      <span class="skill">硬件焊接</span>
-      <span class="skill">SolidWorks 结构设计</span>
-      <span class="skill">嘉立创 EDA 画板</span>
-      <span class="skill">C / C++ / Python</span>
-      <span class="skill">单片机开发</span>
-    </div>
   </section>
 
   <section id="contact">
@@ -846,15 +885,11 @@
     <ul class="contact-list">
       <li>
         <span class="contact-ico">✉️</span>
-        <a href="mailto:1036949664@qq.com">1036949664@qq.com</a>
+        <a href="mailto:xigua_tree@163.com">xigua_tree@163.com</a>
       </li>
       <li>
         <span class="contact-ico">🐙</span>
         <a href="https://github.com/xigua-tree" target="_blank" rel="noopener">github.com/xigua-tree</a>
-      </li>
-      <li>
-        <span class="contact-ico">📺</span>
-        <span class="text">B站：西瓜树上的鱼</span>
       </li>
     </ul>
   </section>
@@ -864,6 +899,13 @@
 </div>
 
 <script>
+  // 刷新时回到顶部：浏览器默认会"恢复上次滚动位置"，但页面里有多个视频、
+  // 加载过程中内容高度会变化，容易让恢复的位置落到页面最底部，所以手动关闭
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
   // 同一时间只播放一个视频：播放某个视频时，自动暂停其它所有视频
   document.querySelectorAll('video').forEach(function (video) {
     video.addEventListener('play', function () {
